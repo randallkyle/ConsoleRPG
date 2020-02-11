@@ -1,0 +1,6 @@
+C:\Users\randa\source\repos\Game0\Game0\bin\Debug\Game0.exe.config
+C:\Users\randa\source\repos\Game0\Game0\bin\Debug\Game0.exe
+C:\Users\randa\source\repos\Game0\Game0\bin\Debug\Game0.pdb
+C:\Users\randa\source\repos\Game0\Game0\obj\Debug\Game0.csprojAssemblyReference.cache
+C:\Users\randa\source\repos\Game0\Game0\obj\Debug\Game0.exe
+C:\Users\randa\source\repos\Game0\Game0\obj\Debug\Game0.pdb

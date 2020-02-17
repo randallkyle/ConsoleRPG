@@ -11,8 +11,11 @@ namespace Game0.Models
         public Zombie()
         {
             this.MobType = "Zombie";
-            this.Health = 75;
+            this.Health = 25;
             this.Level = 1;
+            this.ArmorLevel = this.Level;
+            this.ArmourHealth = 75;
+
         }
     }
 }

@@ -13,6 +13,9 @@ namespace Game0.Models
             this.MobType = "WereWolf";
             this.Health=150;
             this.Level=25;
+            this.ArmorLevel = this.Level;
+            this.ArmourHealth = 25;
+
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Game0
             this.player = Player.ThePlayer;
             this.sceneLevel = 0;
             this.mobList = new List<Mob>();
+            
         }
 
         public void spawnMobs()

@@ -13,6 +13,9 @@ namespace Game0.Models
             this.MobType = "Giant";
             this.Health = 500;
             this.Level = 40;
+            this.ArmorLevel = this.Level;
+            this.ArmourHealth = 250;
+
         }
     }
 }

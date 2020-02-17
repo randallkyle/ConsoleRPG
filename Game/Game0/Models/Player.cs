@@ -11,6 +11,7 @@ namespace Game0
         private int level = 0;
         private string name = "n/a";
         private static readonly Player thePlayer;
+        private IWeapon weapon;
         //public static Player instance { get; set; }
         private Player()
         {
@@ -42,6 +43,11 @@ namespace Game0
             {
                 return Player.thePlayer;
             }
+        }
+        public IWeapon Weapon
+        {
+            get { return this.weapon; }
+            set { this.weapon = value; }
         }
     }
 

@@ -19,15 +19,15 @@ namespace Game0
             Player aPlayer1 = Player.ThePlayer;
             //using the scene object:
             Scene scene = new Scene();
-
+            scene.SceneLevel = 25;
 
             //  ------------------------------------------ BEGIN TESTING CODE ----------------------------------------
-            
+
             PlayerViewer.View();
             PlayerViewer.View("Enter a name:");
             //Change player name and level to match input and test case
             aPlayer1.PlayerMaker(1, Console.ReadLine());
-           
+            aPlayer1.Weapon = new FireStaff();
 
             PlayerViewer.View("Enemies Nearby: ");
             // use the scene object:
@@ -39,19 +39,22 @@ namespace Game0
             // test the attack and defense methods
             foreach (Mob mob in scene.MobList)
             {
-                MobViewer.View(mob.Attack());
-                MobViewer.View(mob.Defend());
+                while (mob.Alive)
+                {
+                    aPlayer1.Weapon.Use(mob);
+                    PlayerViewer.View(mob.ToString());
+                }
             }
             
-            PlayerViewer.View("Testing a New Level:");
+            //PlayerViewer.View("Testing a New Level:");
             //increase the player level
-            aPlayer1.PlayerMaker(25, aPlayer1.Name);
+            //aPlayer1.PlayerMaker(25, aPlayer1.Name);
             //increase the scene level
-            scene.SceneLevel = 25;
+            //scene.SceneLevel = 25;
             // create new mobs
-            scene.spawnMobs();
+            //scene.spawnMobs();
             //print the mobs using the view instead of the other method
-            MobViewer.View(scene.MobList);
+            //MobViewer.View(scene.MobList);
             
             //  -------------------------------------------- END TESTING CODE ----------------------------------------
 

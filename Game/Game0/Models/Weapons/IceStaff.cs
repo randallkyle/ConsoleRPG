@@ -8,14 +8,14 @@ namespace Game0.Models
 {
     class IceStaff : IWeapon
     {
-        public int roundsParalyzed;
+        //public int roundsParalyzed;
         private int damage;
 
         public IceStaff()
         {
             //scale weapons to the player level
-            this.roundsParalyzed = 5 + Player.ThePlayer.Level;
-            this.damage = 10 + Player.ThePlayer.Level;
+            //this.roundsParalyzed = 5 + Player.ThePlayer.Level;
+            this.damage = 8 + Player.ThePlayer.Level;
         }
 
 
@@ -23,7 +23,8 @@ namespace Game0.Models
         {
             // handle the logic to do damage to health and armor here. 
             // No damage done to armor but the effect is not reduced
-            mob.RoundsParalyzed = this.RoundsParalyzed;
+            mob.AddStatusEffect(new Ice());
+            //mob.RoundsParalyzed = this.RoundsParalyzed;
             mob.DamageReceived = this.Damage;
         }
 
@@ -33,9 +34,11 @@ namespace Game0.Models
         {
             get { return this.damage; }
         }
+        /*
         public int RoundsParalyzed
         {
             get { return this.roundsParalyzed; }
         }
+        */
     }
 }

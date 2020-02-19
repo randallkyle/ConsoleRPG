@@ -20,20 +20,50 @@ namespace Game0
 
         private Player player;
         private List<Mob> mobList;
+
+        private Stack<Mob> mobPool;
+
+        public Stack<Mob> _zombiePool;
+        public Stack<Mob> _wereWolfPool;
+        public Stack<Mob> _giantPool;
         private int sceneLevel;
+        private MobFactory _factory;
         public Scene()
         {
             this.player = Player.ThePlayer;
             this.sceneLevel = 0;
             this.mobList = new List<Mob>();
-            
+
+
+            this._zombiePool = new Stack<Mob>();
+            this._wereWolfPool = new Stack<Mob>();
+            this._giantPool = new Stack<Mob>();
+            this._factory = new MobFactory();
         }
 
         public void spawnMobs()
         {
-            this.mobList = MobFactory.CreateList(this.SceneLevel);
+            this._factory.PreLoadMobs(this.sceneLevel);
+            this.createList();
         }
-
+        public void createList()
+        {
+            //add the zombies
+            while (this._zombiePool.Count > 0)
+            {
+                this.mobList.Add(this._zombiePool.Pop());
+            }
+            //add the werewolves
+            while (this._wereWolfPool.Count > 0)
+            {
+                this.mobList.Add(this._wereWolfPool.Pop());
+            }
+            //add the giants
+            while (this._giantPool.Count > 0)
+            {
+                this.mobList.Add(this._giantPool.Pop());
+            }
+        }
         //should pass the mob list to the viewer, kept this method for the sake of the requirements
         public void ListMonsters()
         {
@@ -55,6 +85,34 @@ namespace Game0
         {
             get { return this.sceneLevel; }
             set { this.sceneLevel = value; }
+        }
+        public Stack<Mob> MobPool
+        {
+            get
+            {
+                return this.mobPool;
+            }
+        }
+        public Stack<Giant> GiantPool
+        {
+            get
+            {
+                return this._factory.GiantPool;
+            }
+        }
+        public Stack<Zombie> ZombiePool
+        {
+            get
+            {
+                return this._factory.ZombiePool;
+            }
+        }
+        public Stack<WereWolf> WereWolfPool
+        {
+            get
+            {
+                return this._factory.WereWolfPool;
+            }
         }
     }
 }

@@ -11,15 +11,27 @@ namespace Game0
         private int health;
         private int level;
         private string mobType;
-        private int armorLevel;
-        private bool paralyzed = false;
+        public int armorLevel;
+        // i forgot what was going here 
+        private List<StatusEffect> statusEffects;
+
         private bool alive = true;
+        private bool paralyzed = false;
+        //add mode
+        public int healthLevel;
         // the violence stuff
-        private int fireDamage = 0;
+       // private int fireDamage = 0;
         private int armourHealth;
-        private int roundsParalyzed = 0;
+      //  private int roundsParalyzed = 0;
         private int damageReceived = 0;
 
+        public void Build(int level)
+        {
+            this.Level = level;
+            this.Health = this.Level * this.HealthLevel;
+            this.ArmourHealth = this.Level * this.ArmorLevel;
+            this.StatusEffects = new List<StatusEffect>();
+        }
 
         public string Attack() {
             return "Attacking: " + this.Level + " Damage Done!";
@@ -54,6 +66,11 @@ namespace Game0
             get { return this.armorLevel; }
             set { this.armorLevel = value; }
         }
+        public int HealthLevel
+        {
+            get { return this.healthLevel; }
+            set { this.healthLevel = value; }
+        }
         public bool Paralyzed
         {
             get { return this.paralyzed; }
@@ -64,21 +81,40 @@ namespace Game0
             get { return this.alive; }
             set { this.alive = value; }
         }
+        /*
         public int FireDamage
         {
             get { return this.fireDamage; }
             set { this.fireDamage = value; }
         }
+        */
         public int ArmourHealth
         {
             get { return this.armourHealth; }
             set { this.armourHealth = value; }
-        }
+        }/*
         public int RoundsParalyzed
         {
             get { return this.roundsParalyzed; }
             set { this.roundsParalyzed = value; }
         }
+        */
+        public List<StatusEffect> StatusEffects
+        {
+            get { return statusEffects; }
+            set { this.statusEffects = value; }
+        }
+
+        //for now I just use the list 
+        public void RemoveStatusEffect(StatusEffect effect)
+        {
+            this.statusEffects.Remove(effect);
+        }
+        public void AddStatusEffect(StatusEffect effect)
+        {
+            this.StatusEffects.Add(effect);
+        }
+
         public int DamageReceived
         {
             set {
@@ -92,9 +128,15 @@ namespace Game0
                     // the damage is reduced by the mob's armor level
                     this.Health -= (value*((100-armorLevel)/100));
                 }
+                //now loop over all the status effects and use them
+                foreach (StatusEffect effect in this.StatusEffects.ToList())
+                {
+                    effect.Use(this);
+                }
+
                 //apply fire damage
-                this.Health -= this.FireDamage;
-                this.FireDamage = 0;
+                //this.Health -= this.FireDamage;
+                //this.FireDamage = 0;
 
                 //kill the mob if their health drops below 0:
                 if (this.Health <= 0)

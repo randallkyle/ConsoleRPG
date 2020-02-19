@@ -8,14 +8,18 @@ namespace Game0.Models
 {
     class FireStaff : IWeapon
     {
-        public int fireDamage;
+        //TODO add radius
+        //public int fireDamage;
+        //this is the weapon's base damage
         private int damage;
 
         public FireStaff()
         {
             //scale weapons to the player level
-            this.fireDamage = 10 + Player.ThePlayer.Level;
-            this.damage = 5 + Player.ThePlayer.Level;
+            //this.fireDamage = 10 + Player.ThePlayer.Level;
+
+            // might reduce the damage or add mode
+            this.damage = 4;// 5 + Player.ThePlayer.Level;
         }
 
 
@@ -23,7 +27,8 @@ namespace Game0.Models
         {
             //handle the logic to do damage to health and armor here. 
             // fire damage ignores armor
-            mob.FireDamage = this.FireDamage;
+            mob.AddStatusEffect(new Fire()); // fix the creation to be from a pool?
+            //mob.FireDamage = this.FireDamage;
             mob.DamageReceived = this.Damage;
         }
 
@@ -33,9 +38,10 @@ namespace Game0.Models
         {
             get { return this.damage; }
         }
-        public int FireDamage
+        /*public int FireDamage
         {
             get { return this.fireDamage; }
         }
+        */
     }
 }

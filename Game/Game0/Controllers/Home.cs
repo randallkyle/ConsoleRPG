@@ -15,6 +15,7 @@ namespace Game0
         {
             // setup the environment:
 
+
             // Create the Player singleton object
             Player aPlayer1 = Player.ThePlayer;
             //using the scene object:
@@ -35,8 +36,44 @@ namespace Game0
             scene.spawnMobs();
             //using the required print method: (I also can use views, see below)
             scene.ListMonsters();
-  
-            // test the attack and defense methods
+            Console.WriteLine(scene.MobList);
+
+            //fight all of the zombies first
+            while (scene.ZombiePool.Count > 0)
+            {
+                Zombie zom = scene.ZombiePool.Pop();
+                while (zom.Alive)
+                {
+                    aPlayer1.Weapon.Use(zom);
+                    PlayerViewer.View(zom.ToString());
+                }
+            }
+
+            // fight Jacob and his werewolf buddies
+            while (scene.WereWolfPool.Count > 0)
+            {
+                WereWolf wer = scene.WereWolfPool.Pop();
+                while (wer.Alive)
+                {
+                    aPlayer1.Weapon.Use(wer);
+                    PlayerViewer.View(wer.ToString());
+                }
+            }
+
+            //fight giants last 
+            while (scene.GiantPool.Count > 0)
+            {
+                Giant olaf = scene.GiantPool.Pop();
+                while (olaf.Alive)
+                {
+                    aPlayer1.Weapon.Use(olaf);
+                    PlayerViewer.View(olaf.ToString());
+                }
+            }
+
+
+
+            // this broke from my use of abstract classes and stuff. 
             foreach (Mob mob in scene.MobList)
             {
                 while (mob.Alive)
